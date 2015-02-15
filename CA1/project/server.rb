@@ -25,6 +25,36 @@ def model_show(id, shift)
 	return message
 end
 
+def model_update(show=false, update=false, id, message, shift)
+    db  = SQLite3::Database.new( DATABASE )
+    qry = "SELECT id, name FROM documents;"
+    hash = db.execute( qry )
+
+    cipher = Caesar.new shift.to_i
+    
+    if show
+      qry = "SELECT message FROM documents "                        +
+      "WHERE id = \"#{id}\";"
+      val = db.get_first_value( qry )
+      message_dec = cipher.decrypt(val)
+      db.close
+      return false, hash, message_dec, id
+      
+    elsif update
+      message_enc = cipher.encrypt(message)
+      puts message_enc
+      puts shift
+      puts id
+      qry= "UPDATE documents SET message=\"#{message_enc}\""            +
+           "WHERE id=\"#{id}\";"
+      db.execute( qry )
+      return true, hash
+      
+    else
+      return false, hash
+    end
+end
+
 def model_new(process=false, message, name, shift)
     if process
       cipher = Caesar.new shift.to_i
@@ -111,7 +141,6 @@ def view_new(success=false)
 end
 
 def view_destroy(deleted=false, vals)
-    puts vals
     output = "<html>"                                              +
     "  <body>"
     
@@ -135,6 +164,43 @@ def view_destroy(deleted=false, vals)
     
     return output
 end
+
+def view_update(updated, vals, msg, id, shift)
+    output = "<html>"                                              +
+    "  <body>"
+    
+    if updated
+        output << "<p>Message updated</p>"
+    end
+    
+    if defined? msg
+      output << "    <form action=\"http://localhost:3000/update\""+
+      "    method=\"GET\">"                                        +
+      "      <input type=\"hidden\" name=\"id\" value=\"#{id}\"/>" +
+      "      <input type=\"hidden\" name=\"shift\" value=\"#{shift}\"/>" +
+      "      <input name=\"message\" value=\"#{msg}\"/>"           +
+      "      <input type=\"Submit\"/>"                             +
+      "    </form>"
+    end
+    
+    output << "    <form action=\"http://localhost:3000/update\"" +
+    "    method=\"GET\">"                                          +
+    "      <select name=\"id\">"
+    
+    vals.each do |key, value|
+      output << "<option value=\"#{key}\">#{value}</option><br \>"
+    end
+    
+    output << "</select>"                                          +
+    "      <input name=\"shift\" value=\"Enter shift\"/>"          +
+    "      <input type=\"Submit\"/>"                               +
+    "    </form>"                                                  +
+    "  </body>"                                                    +
+    "</html>"
+    
+    return output
+end
+    
 
 # -- CONTROLLER --
 
@@ -164,7 +230,6 @@ class Controller < WEBrick::HTTPServlet::AbstractServlet
         when "/show"
           id = req.query[ "id" ] || ""
           shift = req.query[ "shift" ] || ""
-          puts id
           rsp.status = 200
           rsp.content_type= "text/html"
           rsp.body = view_show( model_show(id, shift.to_i) )
@@ -182,6 +247,26 @@ class Controller < WEBrick::HTTPServlet::AbstractServlet
           rsp.content_type = "text/html"
           success, vals = model_destroy(process, id)
           rsp.body = view_destroy(success, vals )
+          
+        when "/update"
+          message = req.query[ "message" ] || ""
+          id = req.query[ "id" ] || ""
+          shift = req.query[ "shift" ] || ""
+        
+          if message.length > 0
+            update = true
+            show = false
+          elsif id.length > 0 && shift.length > 0
+            update = false
+            show = true
+          end
+        
+          rsp.status = 200
+          rsp.content_type = "text/html"
+        
+          updated, vals, msg, id = model_update(show, update, id, message, shift)
+        
+          rsp.body = view_update(updated, vals, msg, id, shift)
       end
     end
 end
