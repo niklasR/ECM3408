@@ -1,17 +1,44 @@
 \documentclass[11pt]{article}
 \usepackage{hyperref}
 \usepackage{pdfpages}
+\usepackage{listings}
 \usepackage[a4paper,margin=2cm]{geometry}
 
 \usepackage[round]{natbib}
 
 \begin{document}
-
-\title{ECM3427 - Stage I Report}
-\author{62007094}
-\date{\today}
-\maketitle
-
-\section{SQLite Database Creation}
+    \lstset{
+    	basicstyle=\ttfamily,
+    	breaklines=true,
+		numbers=left,
+    }
+    \title{ECM3427 - Stage I Report}
+    \author{62007094}
+    \date{\today}
+    \maketitle
+    
+    \section{SQLite Database Creation}
+    The following commands can be used to create a table called \texttt{documents}
+    
+    \begin{lstlisting}
+$ sqlite3 skydrive.sqlite3sqlite > CREATE TABLE documents    ...> ( id INT PRIMARY KEY      ...> , message VARCHAR ); # sqlite does not impose length-limits on fields, so none is give..quit
+    \end{lstlisting}
+	
+	\subsection{Testing}
+	Script output of creating a database as described above, storing an unencrypted message and retrieving it:
+	\begin{lstlisting}
+bash-3.2$ sqlite3 skydrive.sqlite3
+SQLite version 3.8.5 2014-08-15 22:37:57
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE documents
+   ...> ( id INT PRIMARY KEY
+   ...> , message VARCHAR );
+sqlite> INSERT INTO documents VALUES
+   ...> (1, "Message");
+sqlite> SELECT * FROM documents;
+1|Message
+sqlite>
+\end{lstlisting}
+	
 
 \end{document}
