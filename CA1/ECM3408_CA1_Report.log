@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.7)  15 FEB 2015 02:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.7)  15 FEB 2015 03:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -361,41 +361,69 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 19.
+(Font)              <12> on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 19.
+(Font)              <8> on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 19.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 48.
-[1
+(Font)              <6> on input line 20.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2014/09/06 1.5e listings language file
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 53.
+ [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 48.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 69.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 69.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 78.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 78.
+ [2]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 143.
+ [3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 143.
 
 (./ECM3408_CA1_Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 48.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 48.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 143.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 143.
 Package rerunfilecheck Info: File `ECM3408_CA1_Report.out' has not changed.
-(rerunfilecheck)             Checksum: 170ACC0739A6C4130A6855FE4723F7F7;115.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 48.
+(rerunfilecheck)             Checksum: D05477AFDC05855758A538415AE22558;163.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 143.
  ) 
 Here is how much of TeX's memory you used:
- 8120 strings out of 493117
- 118898 string characters out of 6135433
- 261369 words of memory out of 5000000
- 11509 multiletter control sequences out of 15000+600000
- 8055 words of font info for 29 fonts, out of 8000000 for 9000
+ 8471 strings out of 493117
+ 123718 string characters out of 6135433
+ 355438 words of memory out of 5000000
+ 11754 multiletter control sequences out of 15000+600000
+ 9325 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,6n,39p,256b,874s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ECM3408_CA1_Report.pdf (1 page, 68522 bytes).
+ 37i,7n,42p,256b,1761s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on ECM3408_CA1_Report.pdf (3 pages, 119589 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
- 22 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 200 PDF objects out of 1000 (max. 8388607)
+ 184 compressed objects within 2 object streams
+ 113 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 
