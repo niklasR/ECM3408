@@ -18,12 +18,16 @@
     \date{\today}
     \maketitle
     
-    \section{SQLite Database Creation}
+    \section{SQLite Database Creation} ew
     The following commands can be used to create a table called \texttt{documents}
     
     \begin{lstlisting}[basicstyle=\ttfamily]
-$ sqlite3 skydrive.sqlite3sqlite > CREATE TABLE documents    ...> ( id INT PRIMARY KEY 
-    ...> , name VARCHAR    ...> , message VARCHAR ); # sqlite does not impose length-limits on fields, so none is give..quit
+$ sqlite3 skydrive.sqlite3
+sqlite > CREATE TABLE documents
+    ...> ( id INT PRIMARY KEY 
+    ...> , name VARCHAR
+    ...> , message VARCHAR ); # sqlite does not impose length-limits on fields, so none is given.
+.quit
     \end{lstlisting}
 	
 	\subsection{Testing}
@@ -44,71 +48,22 @@ sqlite>
 \end{lstlisting}
 
 \section{The Ruby Code}
-Please note that the class \texttt{caesar} was implemented after a model-answer for the problem.
-\begin{lstlisting}[language=Ruby]
-#!/usr/bin/env ruby -wrequire "sqlite3"require "webrick"DATABASE = "skydrive.sqlite3"
+\lstinputlisting[language=Ruby]{project/server.rb}
+\section{Testing}
 
-def model_list()	db  = SQLite3::Database.new( DATABASE )	qry = "select id, name from documents;"
-	hash = db.execute( qry )	db.close	return hashend
-	
-def model_show(id)	db  = SQLite3::Database.new( DATABASE )
-	qry = "select message from documents "
-	      "where id = \"#{id}\""
-	val = db.get_first_value( qry)
-	db.close
-	return val
-end
+\begin{tabular}{| p{2cm} | p{4.5cm} | p{4.5cm} | p{4.5cm} |}
+Unit              & Process & Expected Outcome & Actual Outcome \\
+\hline
+Index             & Call /index & List of all saved messages & As Expected \\
+Index/Show     & Select a message on /index, enter the shift and submit & Opens /show with decrypted message. Shows only scrambled message with the wrong key provided & As Expected \\
+New               & Call /new & Option to enter new message with name, shift and message body & As Expected\\
+Add New           & Submit new entry and have it written to the database & Submit form at /new with filled out forms andante confirmation of entry been written, and have it display on /index and read it on /show with the shift originally provided. Scrambled output if providing any other shift key & As expected \\
+Destroy           & Open /destroy and delete an entry & Get presented with a list of entries, select one for deletion, get confirmation, and not be able to access it anymore on /index & As Expected \\
+Update            & Open /update, select an entry to be updated, enter the shift key, edit and save & As process and then check on /index and subsequently on /show whether the change was successful & As Expected
 
-def view_show(message, shift)
-    cipher = Caesar.initialise(shift)
-    message_plain = cipher.decrypt(message)
-    "<html>"                                            +
-    "  <body>"                                          +
-    "    <p>" + message_plain.to_s + "</p>              +    "  </body>"                                         +    "</html>"
+\end{tabular}
+\\\\\\
+All components tested for functionality and purposes succesfully.
 
-def view_list(vals)
-	output = "<html>"                                   +
-	"  <body>"
-	
-	vals.each do |key, value|
-	  output <<	 "<a href=\"/show/#{key}\">#{value}</a><br \>"
-	end
-	
-	output << "    <form action=\"http://localhost:3000/list\""   +	"          method=\"GET\">"                         +	"      <input name=\"code\" value=\"Enter id\"/>"   +
-	"      <input type=\"Submit\"/>"                    +	"    </form>"                                       +	"  </body>"                                         +	"</html>"
-end
-
-
-class Controller < WEBrick::HTTPServlet::AbstractServlet    def do_GET ( req, rsp )      case req.path        when "/list"          rsp.status = 200          rsp.content_type = "text/html"
-          rsp.body = view_list( model_list() )
-        when "/show"
-          id = req.query[ "id" ] || ""
-          rsp.status = 200
-          rsp.contetn_type= "text/html"
-          rsp.body = view_show( model_show(id), 3)
-      end
-    endend
-    
-class Caesar
-  def initialise(shift, alphabet = ('a'..'z').to_a.join)
-    chars = alphabet.chars.to_a
-    @encrypter = Hash[chars.zip(chars.rotate(shift))]
-    @decrypter = Hash[chars.zip(chars.rotate(-shift))]
-  end
-
-  def encrypt(string)
-    @encrypter.values_at(*string.chars).join
-  end
-
-  def decrypt(string)
-    @decrypter.values_at(*string.chars).join
-  end
-end
-
-
-server = WEBrick::HTTPServer.new( :Port => 3000 )   server.mount( "/", Controller )   server.start
-
-\end{lstlisting}
-	
 
 \end{document}
